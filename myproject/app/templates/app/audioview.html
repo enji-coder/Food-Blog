@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Audio Gallery</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Food Blog Web Template">
+  <meta name="keywords" content="food, unica, creative, html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicon -->
+  <link href="{%static 'app/img/favicon.ico' %}" rel="shortcut icon" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,500,500i,600,600i,700" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{%static 'app/css/bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="{%static 'app/css/font-awesome.min.css' %}" />
+  <link rel="stylesheet" href="{%static 'app/css/owl.carousel.css' %}" />
+  <link rel="stylesheet" href="{%static 'app/css/animate.css' %} " />
+  <link rel="stylesheet" href="{%static 'app/css/style.css' %}" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <!-- Page Preloder -->
+  <div id="preloder">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Header section -->
+  <header class="header-section">
+    <div class="header-top">
+      <div class="container">
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Upload Audio</h4>
+              </div>
+              <div class="modal-body">
+                  <form action="{% url 'upload-audio' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" class="fadeIn fourth" name="name">
+                      Select file: <input type="file" name="audiofile"><br>
+                    <input type="submit" class="fadeIn fourth" value="upload">
+                  </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <!-- End Modal -->
+
+        <div class="header-social">
+          <a href="#"><i class="fa fa-pinterest"></i></a>
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-dribbble"></i></a>
+          <a href="#"><i class="fa fa-behance"></i></a>
+          <a href="#"><i class="fa fa-linkedin"></i></a>
+        </div>
+
+        <div class="user-panel">
+          <div class="user-panel">
+            <a href="{% url 'registerpage' %}">Register</a> /
+            <a href="{% url 'loginpage' %}">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-bottom">
+      <div class="container">
+        <a href="index.html" class="site-logo">
+          <img src="{%static 'app/img/logo.png' %}" alt="">
+        </a>
+        <div class="nav-switch">
+          <i class="fa fa-bars"></i>
+        </div>
+
+        <div class="header-search">
+          <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+          Upload Audio <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-upload"></i></a>
+        </div>
+
+        <ul class="main-menu">
+          <li><a href="{% url 'indexpage' %}">Home</a></li>
+          <li><a href="{% url 'gallaryview' %}">Gallery</a></li>
+          <li><a href="{% url 'videogallery' %}">Video</a></li>
+          <li><a href="#">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+      </div>
+    </div>
+  </header>
+  <!-- Header section end -->
+
+
+  <div class="container">
+    <div class="row">
+         
+      {% for item in getall %}
+      <audio controls>
+        <source src="horse.ogg" type="audio/ogg">
+        <source src="{{item.audiofile.url}}" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
+      {% endfor %}
+
+
+      </div>
+  </div>
+  
+  <!-- Footer section end -->
+
+
+
+  <!--====== Javascripts & Jquery ======-->
+  <script src="{% static 'app/js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'app/js/main.js' %}"></script>
+</body>
+
+</html>
